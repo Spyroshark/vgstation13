@@ -109,6 +109,7 @@
 	species_final_equip(H)
 	spawn_id(H)
 	post_equip(H) // Accessories, IDs, etc.
+	map.map_equip(H) //Does this map give special gear?
 	if (priority)
 		post_equip_priority(H)
 	give_disabilities_equipment(H)
@@ -127,6 +128,10 @@
 	if (H.client?.IsByondMember())
 		to_chat(H, "Thank you for supporting BYOND!")
 		items_to_collect[/obj/item/weapon/storage/box/byond] = GRASP_LEFT_HAND
+
+	if (H.client?.ivoted)
+		to_chat(H, "Thank you for voting!")
+		items_to_collect[/obj/item/clothing/accessory/voter_pin] = GRASP_RIGHT_HAND
 
 	if (!give_disabilities_equipment)
 		return
@@ -205,9 +210,6 @@
 			if (ispath(equip_survival_gear[species]))
 				pack = new equip_survival_gear(H)
 				H.put_in_hand(GRASP_RIGHT_HAND, pack)
-		else
-			pack = new H.species.survival_gear(H)
-			H.put_in_hand(GRASP_RIGHT_HAND, pack)
 		for (var/item in items_to_collect)
 			if (items_to_collect[item] == "Surival Box" && pack)
 				new item(pack)

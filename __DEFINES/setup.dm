@@ -608,6 +608,7 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define XENO_HOST	32768	//Tracks whether we're gonna be a baby alien's mummy.
+#define ALWAYS_CRIT 65536
 
 var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
 
@@ -720,6 +721,12 @@ SEE_PIXELS	256
 
 //some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26	//Used to trigger removal from a processing list
+
+#define PROJECTILE_COLLISION_DEFAULT	0
+#define PROJECTILE_COLLISION_MISS		1
+#define PROJECTILE_COLLISION_BLOCKED	2
+#define PROJECTILE_COLLISION_REBOUND	3
+#define PROJECTILE_COLLISION_PORTAL		4
 
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2
@@ -878,6 +885,7 @@ SEE_PIXELS	256
 #define ROLE_MINOR			"minor roles"
 #define ROLE_ALIEN			"xenomorph"
 #define ROLE_STRIKE			"striketeam"
+#define ROLE_PRISONER		"prisoner"
 
 #define AGE_MIN 17			//youngest a character can be
 #define AGE_MAX 85			//oldest a character can be
@@ -904,6 +912,7 @@ SEE_PIXELS	256
 #define WANTED_HUD          "wanted" // wanted, released, parroled, security status
 #define IMPLOYAL_HUD		"imployal" // loyality implant
 #define IMPCHEM_HUD		    "impchem" // chemical implant
+#define IMPHOLY_HUD		    "impholy" // holy implant
 #define IMPTRACK_HUD		"imptrack" // tracking implant
 #define SPECIALROLE_HUD 	"specialrole" // AntagHUD image
 #define STATUS_HUD_OOC		"status_ooc" // STATUS_HUD without virus db check for someone being ill.
@@ -1293,6 +1302,7 @@ var/default_colour_matrix = list(1,0,0,0,\
 #define LANGUAGE_MARTIAN "Martian"
 #define LANGUAGE_INSECT "Insectoid"
 #define LANGUAGE_DEATHSQUAD "Deathsquad"
+#define LANGUAGE_CLOWN "Clown"
 
 //#define SAY_DEBUG 1
 #ifdef SAY_DEBUG
@@ -1349,6 +1359,7 @@ var/proccalls = 1
 #define CHANNEL_AMBIENCE			1023
 #define CHANNEL_ADMINMUSIC			1024
 #define CHANNEL_STARMAN				1025
+#define CHANNEL_CRITSOUNDS			1026
 
 //incorporeal_move values
 #define INCORPOREAL_DEACTIVATE	0
